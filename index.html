@@ -11,7 +11,7 @@
 <script src="bower_components/three.js/three.min.js"></script>
 <script>
     // Javascript will go here.
-    var scene, camera, renderer;
+    var scene, camera, renderer,group ;
     var geometry,geometry2, material,material2, mesh,line;
 
     init();
@@ -19,7 +19,7 @@
 
 
     function grouping (){
-        var group = new THREE.Group();
+        group = new THREE.Group();
         scene.add( group );
 
         group.add( mesh1 );
@@ -27,6 +27,8 @@
 
         mesh2.visible = false;
         group.remove( mesh2 );
+
+        //hey i want to commit this
 
         group.children // mesh1
         group.parent // scene
