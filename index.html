@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic Three.js App</title>
+    <style>
+        html, body { margin: 0; padding: 0; overflow: hidden; }
+    </style>
+</head>
+<body>
+<script src="bower_components/three.js/three.min.js"></script>
+<script>
+    // Javascript will go here.
+    var scene, camera, renderer;
+    var geometry,geometry2, material,material2, mesh,line;
+
+    init();
+    animate();
+
+
+    function grouping (){
+        var group = new THREE.Group();
+        scene.add( group );
+
+        group.add( mesh1 );
+        group.add( mesh2 );
+
+        mesh2.visible = false;
+        group.remove( mesh2 );
+
+        group.children // mesh1
+        group.parent // scene
+    }
+
+    function init() {
+
+        scene = new THREE.Scene();
+
+        camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+        camera.position.z = 1000;
+
+        geometry = new THREE.BoxGeometry( 200, 200, 200 );
+        material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
+
+        mesh = new THREE.Mesh( geometry, material );
+        scene.add( mesh );
+
+        material2 = new THREE.LineBasicMaterial({color: 0x0000ff});
+
+        geometry2 = new THREE.Geometry();
+        geometry2.vertices.push(
+                new THREE.Vector3( -10, 0, 0 ),
+                new THREE.Vector3( 0, 10, 0 ),
+                new THREE.Vector3( 10, 0, 0 )
+        );
+
+        line = new THREE.Line( geometry2, material2 );
+        scene.add( line );
+
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+
+        document.body.appendChild( renderer.domElement );
+
+    }
+
+    function animate() {
+
+        requestAnimationFrame( animate );
+
+        mesh.rotation.x += 0.01;
+        mesh.rotation.y += 0.02;
+
+        line.rotation.x += 0.01;
+        line.rotation.y += 0.02;
+
+        renderer.render( scene, camera );
+
+    }
+
+    function drawLine(){
+
+    }
+
+
+</script>
+</body>
+</html>
